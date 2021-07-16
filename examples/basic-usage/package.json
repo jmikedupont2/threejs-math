@@ -1,0 +1,18 @@
+{
+  "name": "basic-usage",
+  "description": "SketchThreejsV2 Basic Usage Example",
+  "keywords": [
+    "sketch-threejs-v2"
+  ],
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-scripts": "3.3.0",
+    "sketch-threejs-v2": "latest"
+  },
+  "scripts": {
+    "start": "react-scripts start"
+  }
+}
