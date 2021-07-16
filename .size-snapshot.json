@@ -1,0 +1,36 @@
+{
+  "sketch-threejs-v2.cjs.development.js": {
+    "bundled": 564,
+    "minified": 429,
+    "gzipped": 245
+  },
+  "sketch-threejs-v2.cjs.production.js": {
+    "bundled": 377,
+    "minified": 281,
+    "gzipped": 195
+  },
+  "sketch-threejs-v2.esm.js": {
+    "bundled": 249,
+    "minified": 194,
+    "gzipped": 161,
+    "treeshaked": {
+      "rollup": {
+        "code": 60,
+        "import_statements": 40
+      },
+      "webpack": {
+        "code": 1182
+      }
+    }
+  },
+  "sketch-threejs-v2.umd.development.js": {
+    "bundled": 977,
+    "minified": 543,
+    "gzipped": 318
+  },
+  "sketch-threejs-v2.umd.production.js": {
+    "bundled": 747,
+    "minified": 436,
+    "gzipped": 267
+  }
+}
