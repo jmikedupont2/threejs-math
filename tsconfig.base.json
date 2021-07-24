@@ -16,8 +16,12 @@
     "pretty": true,
     "removeComments": true,
     "sourceMap": true,
-    "strict": true,
-    "target": "es5"
+    "strict": false,
+      "target": "es5",
+      "baseUrl": ".",
+      "paths": {
+	  "react-range-step-input": ["./src/slider"] 
+      }
   },
   "exclude": ["node_modules", "dist"],
   "include": ["src"]

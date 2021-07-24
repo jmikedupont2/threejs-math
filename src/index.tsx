@@ -1,12 +1,12 @@
 import * as THREE from 'three';
 import ReactDOM from 'react-dom';
-
-let points: THREE.Points;
-
 import React from 'react';
-
 import { RangeStepInput } from 'react-range-step-input';
 
+let points: THREE.Points;
+let scene: THREE.Scene;
+let camera: THREE.PerspectiveCamera;
+let renderer: THREE.WebGLRenderer;
 
 const forceNumber = function(n: any) {
     n = Number(n);
@@ -93,7 +93,6 @@ class App extends React.Component<IProps, MyProps> {
 
                 </span>
             </div>
-
 
             <div>
                 Model Rotation:
@@ -221,7 +220,7 @@ class App extends React.Component<IProps, MyProps> {
 };
 
 
-export function createPoints(xsize: number, ysize: number, zsize: number, scale: number, nodeSize: number) {
+function createPoints(xsize: number, ysize: number, zsize: number, scale: number, nodeSize: number) {
     var geometry = new THREE.BufferGeometry();
     var vertices_base = [];
     var colors_base = [];
@@ -266,187 +265,7 @@ export function createPoints(xsize: number, ysize: number, zsize: number, scale:
     return ret;
 }
 
-/* export class WebGLContent {
- *     constructor() { }
- *     async start(canvas: HTMLCanvasElement) {
- *         renderer = new THREE.WebGL1Renderer({
- *             alpha: true,
- *             antialias: true,
- *             canvas: canvas,
- *         });
- * 
- *         renderer.setPixelRatio(window.devicePixelRatio);
- *         renderer.setClearColor(0x0e0e0e, 1.0);
- *         //points = createPoints(gstate.xsize, gstate.ysize, gstate.zsize, gstate.scale, gstate.nodeSize);
- *         var light = new THREE.AmbientLight('white');
- *         camera.position.x = 15;
- *         camera.position.y = 16;
- *         camera.position.z = 13;
- * 
- *         const geometry = new THREE.BoxBufferGeometry(20, 20, 20);
- * 
- *         // create a default (white) Basic material
- *         const material = new THREE.MeshBasicMaterial();
- * 
- *         // create a Mesh containing the geometry and material
- *         var cube = new THREE.Mesh(geometry, material);
- *         cube.position.set(0, 0, 0);
- *         // add the mesh to the scene
- *         scene.add(cube);
- *         scene.add(light);
- *         scene.add(camera);
- *         camera.lookAt(cube.position);
- *         //scene.add(points);
- * 
- *     }
- *     play() {
- *         clock.start();
- *         this.update();
- *     }
- *     pause() {
- *         clock.stop();
- *     }
- *     update() {
- * 
- *         if (clock.running === false) return;
- * 
- *         //points.rotation.x += 0.01;
- *         //points.rotation.y += 0.003;
- *         //points.rotation.z += 0.001;
- *         //const colorb = points.geometry.attributes.color;
- * 
- *         //var colorsa = colorb.array;
- *         //var len = colorsa.length;
- *         // for (var i = 0; i < colorsa.length; i += 3) {
- *         //     //            var c = palette.next(i + ticker);
- *         //     colorsa[i] = len / i;
- *         //     colorsa[i + 1] = len / i;
- *         //     colorsa[i + 2] = len / i;
- * 
- *         // }
- *         // colorb.needsUpdate = true;
- *         renderer.render(scene, camera);
- *     }
- * 
- *     resize(resolution: THREE.Vector2) {
- *         renderer.setSize(resolution.x, resolution.y);
- *     }
- * };
- * 
- * 
- * export default async function main() {
- *     const webglContent = new WebGLContent();
- *     const resolution = new THREE.Vector2();
- *     const canvas: HTMLCanvasElement | null = document.getElementById('canvas-webgl') as HTMLCanvasElement;
- *     const preloader = document.querySelector('.p-preloader');
- *  */
-/* const resizeWindow = () => {
- *     resolution.set(document.body.clientWidth, window.innerHeight);
- *     canvas.width = resolution.x;
- *     canvas.height = resolution.y;
- *     webglContent.resize(resolution);
- * };
- * const on = () => {
- *     window.addEventListener('resize', debounce(resizeWindow, 100));
- * };
- * const update = () => {
- *     webglContent.update();
- *     requestAnimationFrame(update);
- * };
 
- * if (canvas) {
- *     await webglContent.start(canvas);
- * }
- * on();
- * resizeWindow();
- * if (preloader) {
- *     preloader.classList.add('is-hidden');
- * }
- * webglContent.play();
- * update();
- * //camera.lookAt(cube.position);
-
- */
-/* const container = document.querySelector('#scene-container');
- * 
- * // create a Scene
- * const scene = new THREE.Scene();
- * 
- * // Set the background color
- * scene.background = new THREE.Color('skyblue');
- * 
- * // Create a camera
- * const fov = 35; // AKA Field of View
- * const aspect = container.clientWidth / container.clientHeight;
- * const near = 0.1; // the near clipping plane
- * const far = 100; // the far clipping plane
- * 
- * const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
- * 
- * // every object is initially created at ( 0, 0, 0 )
- * // move the camera back so we can view the scene
- * camera.position.set(0, 0, 10);
- * 
- * // create a geometry
- * const geometry = new THREE.BoxBufferGeometry(2, 2, 2);
- * 
- * // create a default (white) Basic material
- * const material = new THREE.MeshBasicMaterial();
- * 
- * // create a Mesh containing the geometry and material
- * const cube = new THREE.Mesh(geometry, material);
- * 
- * // add the mesh to the scene
- * scene.add(cube);
- * 
- * // create the renderer
- * const renderer = new THREE.WebGLRenderer();
- * 
- * // next, set the renderer to the same size as our container element
- * renderer.setSize(container.clientWidth, container.clientHeight);
- * 
- * // finally, set the pixel ratio so that our scene will look good on HiDPI displays
- * renderer.setPixelRatio(window.devicePixelRatio);
- * 
- * // add the automatically created <canvas> element to the page
- * container.append(renderer.domElement);
- * 
- * // render, or 'create a still image', of the scene
- * renderer.render(scene, camera);
- *  }
- *  *
- *  * main(); 
-*/
-
-
-
-const scene = new THREE.Scene()
-
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
-camera.position.z = 2
-
-const renderer = new THREE.WebGLRenderer()
-renderer.setSize(window.innerWidth, window.innerHeight)
-document.body.appendChild(renderer.domElement)
-
-
-gstate = {
-    fov: 146,
-    xsize: 10,
-    ysize: 10,
-    zsize: 2,
-
-    xrot: 0,
-    yrot: 0,
-    zrot: 0.0001,
-
-    scale: 0.4,
-    nodeSize: 0.1,
-};
-
-points = createPoints(gstate.xsize, gstate.ysize, gstate.zsize, gstate.scale, gstate.nodeSize);
-scene.add(points)
-window.addEventListener('resize', onWindowResize, false)
 function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight
     camera.updateProjectionMatrix()
@@ -467,6 +286,42 @@ function animate() {
 function render() {
     renderer.render(scene, camera)
 }
-animate()
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
+export default function main() {
+
+    const scene = new THREE.Scene()
+
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+    camera.position.z = 2
+
+    const renderer = new THREE.WebGLRenderer()
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    document.body.appendChild(renderer.domElement)
+
+
+    gstate = {
+        fov: 146,
+        xsize: 10,
+        ysize: 10,
+        zsize: 2,
+
+        xrot: 0,
+        yrot: 0,
+        zrot: 0.0001,
+
+        scale: 0.4,
+        nodeSize: 0.1,
+    };
+
+    points = createPoints(gstate.xsize, gstate.ysize, gstate.zsize, gstate.scale, gstate.nodeSize);
+    scene.add(points)
+    window.addEventListener('resize', onWindowResize, false)
+    animate();
+
+    ReactDOM.render(<App />, document.getElementById('root'));
+
+}
+
+
+main();

@@ -1,25 +1,25 @@
 {
   "sketch-threejs-v2.cjs.development.js": {
-    "bundled": 564,
-    "minified": 429,
-    "gzipped": 245
+    "bundled": 9996,
+    "minified": 6912,
+    "gzipped": 1676
   },
   "sketch-threejs-v2.cjs.production.js": {
-    "bundled": 377,
-    "minified": 281,
-    "gzipped": 195
+    "bundled": 9996,
+    "minified": 6912,
+    "gzipped": 1676
   },
   "sketch-threejs-v2.esm.js": {
-    "bundled": 249,
-    "minified": 194,
-    "gzipped": 161,
+    "bundled": 8210,
+    "minified": 5575,
+    "gzipped": 1435,
     "treeshaked": {
       "rollup": {
-        "code": 60,
-        "import_statements": 40
+        "code": 4941,
+        "import_statements": 160
       },
       "webpack": {
-        "code": 1182
+        "code": 6233
       }
     }
   },
