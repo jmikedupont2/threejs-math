@@ -213,15 +213,70 @@ interface MyProps {
     nodeSize: number;
 };
 
-let gstate: MyProps;
+interface IProps {
+    /* fov: number;
+     * xsize: number;
+     * ysize: number;
+     * zsize: number;
 
-interface IProps { };
+     * xrot: number;
+     * yrot: number;
+     * zrot: number;
+
+     * scale: number;
+     * nodeSize: number;
+     */
+};
 
 class App extends React.Component<IProps, MyProps> {
+    state: MyProps = {
+
+        fov: 146,
+        xsize: 10,
+        ysize: 10,
+        zsize: 2,
+
+        xrot: 0,
+        yrot: 0,
+        zrot: 0.001,
+
+        scale: 0.4,
+        nodeSize: 0.1,
+
+    };
+
     constructor(props: IProps) {
         super(props);
-        this.state = gstate;
+        //this.state = gstate;
+        points = createPoints(this.state.xsize,
+            this.state.ysize,
+            this.state.zsize,
+            this.state.scale,
+            this.state.nodeSize);
+        scene.add(points)
+
+        this.animate()
     }
+
+    animate() {
+        requestAnimationFrame(
+            () => {
+                this.animate()
+            });
+
+        points.rotation.y += this.state.yrot;
+        points.rotation.z += this.state.zrot;
+        points.rotation.x += this.state.xrot;
+
+        this.dorender()
+    }
+
+    dorender() {
+        if (renderer) {
+            renderer.render(scene, camera)
+        }
+    }
+
     render() {
         return <div>
             <div>
@@ -349,7 +404,7 @@ class App extends React.Component<IProps, MyProps> {
         camera.fov = newVal;
         camera.updateProjectionMatrix();
         //camera.n
-        gstate = this.state;
+        //gstate = this.state;
     }
     refreshSize() {
         scene.remove(points);
@@ -358,7 +413,7 @@ class App extends React.Component<IProps, MyProps> {
         if (renderer) {
             renderer.render(scene, camera);
         }
-        gstate = this.state;
+        //gstate = this.state;
     }
     onChangeXSize(e: any) {
         const newVal = forceNumber(e.target.value);
@@ -384,12 +439,12 @@ class App extends React.Component<IProps, MyProps> {
     onChangeYRot(e: any) {
         const newVal = forceNumber(e.target.value);
         this.setState({ yrot: newVal });
-        gstate = this.state;
+        //gstate = this.state;
     }
     onChangeZRot(e: any) {
         const newVal = forceNumber(e.target.value);
         this.setState({ zrot: newVal });
-        gstate = this.state;
+        //        gstate = this.state;
     }
 
     onChangeScale(e: any) {
@@ -457,24 +512,9 @@ function onWindowResize() {
     if (renderer) {
         renderer.setSize(window.innerWidth, window.innerHeight)
     }
-    render()
+    // render()
 }
 
-function animate() {
-    requestAnimationFrame(animate)
-
-    points.rotation.y += gstate.yrot;
-    points.rotation.z += gstate.zrot;
-    points.rotation.x += gstate.xrot;
-
-    render()
-}
-
-function render() {
-    if (renderer) {
-        renderer.render(scene, camera)
-    }
-}
 
 
 export default function main() {
@@ -488,25 +528,8 @@ export default function main() {
     renderer.setSize(window.innerWidth, window.innerHeight)
     document.body.appendChild(renderer.domElement)
 
-
-    gstate = {
-        fov: 146,
-        xsize: 10,
-        ysize: 10,
-        zsize: 2,
-
-        xrot: 0,
-        yrot: 0,
-        zrot: 0.001,
-
-        scale: 0.4,
-        nodeSize: 0.1,
-    };
-
-    points = createPoints(gstate.xsize, gstate.ysize, gstate.zsize, gstate.scale, gstate.nodeSize);
-    scene.add(points)
     window.addEventListener('resize', onWindowResize, false)
-    animate();
+    //animate();
 
     ReactDOM.render(<App />, document.getElementById('root'));
 
