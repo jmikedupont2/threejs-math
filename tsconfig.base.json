@@ -19,10 +19,7 @@
     "strict": false,
       "target": "es5",
       "baseUrl": ".",
-      "paths": {
-	  "node_modules/react-range-step-input/build/index.js": ["./src/slider"] ,
-	  "react-range-step-input": ["./src/slider"] 
-      }
+
   },
   "exclude": ["node_modules", "dist"],
   "include": ["src"]
