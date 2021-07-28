@@ -1,36 +1,36 @@
 {
   "sketch-threejs-v2.cjs.development.js": {
-    "bundled": 9996,
-    "minified": 6912,
-    "gzipped": 1676
+    "bundled": 13138,
+    "minified": 8661,
+    "gzipped": 2184
   },
   "sketch-threejs-v2.cjs.production.js": {
-    "bundled": 9996,
-    "minified": 6912,
-    "gzipped": 1676
+    "bundled": 13138,
+    "minified": 8661,
+    "gzipped": 2184
   },
   "sketch-threejs-v2.esm.js": {
-    "bundled": 8210,
-    "minified": 5575,
-    "gzipped": 1435,
+    "bundled": 11470,
+    "minified": 7450,
+    "gzipped": 1970,
     "treeshaked": {
       "rollup": {
-        "code": 4941,
-        "import_statements": 160
+        "code": 6628,
+        "import_statements": 104
       },
       "webpack": {
-        "code": 6233
+        "code": 7814
       }
     }
   },
   "sketch-threejs-v2.umd.development.js": {
-    "bundled": 977,
-    "minified": 543,
-    "gzipped": 318
+    "bundled": 1060021,
+    "minified": 516335,
+    "gzipped": 123451
   },
   "sketch-threejs-v2.umd.production.js": {
-    "bundled": 747,
-    "minified": 436,
-    "gzipped": 267
+    "bundled": 1060021,
+    "minified": 516335,
+    "gzipped": 123451
   }
 }
